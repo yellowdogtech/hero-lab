@@ -4,22 +4,23 @@ import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-
+import { AngularFireDatabase } from 'angularfire2/database';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class HeroService {
 
   private heroesUrl = 'api/heroes';
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private db: AngularFireDatabase) { }
 
   /** GET heroes from the server */
   getHeroes (): Observable<Hero[]> {
@@ -28,6 +29,18 @@ export class HeroService {
         tap(heroes => this.log('fetched heroes')),
         catchError(this.handleError('getHeroes', []))
       );
+  }
+
+  getYears(): Observable<any[]> {
+    let years = this.db.list('years').valueChanges();
+    return years;
+  }
+
+  test(): void {
+    let years = this.db.list('years').valueChanges();
+    years.subscribe(d => {
+      console.log(d);
+    });
   }
 
   /** GET hero by id. Will 404 if id not found */
