@@ -32,8 +32,11 @@ export class HeroService {
   }
 
   getYears(): Observable<any[]> {
-    let years = this.db.list('years').valueChanges();
-    return years;
+    return this.db.list('years').valueChanges()
+      .pipe(
+        tap(years => this.log('years fetched')),
+        catchError(this.handleError('years', []))
+      );
   }
 
   test(): void {
