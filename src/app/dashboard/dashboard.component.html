@@ -1,18 +1,30 @@
-<h3>Top Heroes</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let hero of heroes" class="col-1-4" routerLink="/detail/{{hero.id}}">    
-    <div class="module hero">
-      <h4>{{hero.name}}</h4>
+<div class="uk-child-width-expand@s uk-text-center uk-grid" >
+  <div class="uk-card uk-card-default uk-card-body" *ngFor="let owner of selectedYear.owners">
+      <h3 class="uk-heading-divider">
+        <a routerLink="/detail/{{owner?.id}}">{{owner?.name}}</a></h3>
+      <table class="uk-table uk-table-striped">
+        <tbody>
+          <tr>
+            <td>Wins:</td>
+            <td>{{owner?.wins}}</td>
+          </tr>
+          <tr>
+            <td>Expected Wins:</td>
+            <td>{{owner?.expected_wins}}</td>
+          </tr>             
+          <tr>
+            <td>Conference Wins: </td>
+            <td>{{owner?.conference_wins}}</td>
+          </tr>             
+          <tr>
+            <td>Superbowl Wins: </td>
+            <td>{{owner?.superbowl_wins}}</td>
+          </tr>             
+          <tr>
+              <td>Total Points: </td>
+              <td>{{owner?.wins + (owner?.playoff_wins * 3) + (owner?.conference_wins * 7) + (owner?.superbowl_wins * 12)}}</td>
+            </tr>             
+          </tbody>
+      </table>
     </div>
-  </a>
-
-
-  {{years}}
-  <!-- <ul>
-    <li class="text" *ngFor="let item of years | async">
-      {{year}}
-    </li>
-  </ul> -->
 </div>
-
-<app-hero-search></app-hero-search>

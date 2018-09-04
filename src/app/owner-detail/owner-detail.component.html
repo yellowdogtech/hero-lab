@@ -1,0 +1,66 @@
+<div *ngIf="owner">
+<h3> {{owner.name}}</h3>
+  <ul uk-tab>
+    <li class="uk-active">
+      <a href="#">Teams</a>
+    </li>
+    <li><a href="#">Weeks</a></li>
+</ul>
+<ul class="uk-switcher uk-margin">
+    <li>
+      <table class="uk-table">
+        <thead>
+          <tr>
+            <th>Pick</th>
+            <th>Team</th>
+            <th>Points</th>
+            <th>Wins</th>
+            <th>Playoff Wins</th>
+            <th>Conference Wins</th>
+            <th>Superbowl Wins</th>
+            <th>Pre-season O/U</th>
+            <th>Weeks Favored</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let team of owner.teams">
+            <td>{{team.pick}}</td>
+            <td>{{team.name}}</td>
+            <td>{{team.wins + (team.playoff_wins * 3) + (team.conference_wins * 7) + (team.superbowl_wins * 12)}}</td>
+            <td>{{team.wins}}</td>
+            <td>{{team.playoff_wins}}</td>
+            <td>{{team.conference_wins}}</td>
+            <td>{{team.superbowl_wins}}</td>
+            <td>{{team.vegas}}</td>
+            <td>{{getWeeksFavored(team)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+    <li>
+      <table class="uk-table">
+        <thead>
+          <tr>
+            <th>Week</th>
+            <th *ngFor="let team of owner.teams">{{team.name}}</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let week of weeks">
+            <td>{{week}}</td> 
+            <td *ngFor="let team of owner.teams">{{isFavored(team, week)}}</td>
+              <!-- <td>{{team.pick}}</td>
+              <td>{{team.name}}</td>
+              <td>{{team.wins + (team.playoff_wins * 3) + (team.conference_wins * 7) + (team.superbowl_wins * 12)}}</td>
+              <td>{{team.wins}}</td>
+              <td>{{team.playoff_wins}}</td>
+              <td>{{team.conference_wins}}</td>
+              <td>{{team.superbowl_wins}}</td>
+              <td>{{team.vegas}}</td>
+              <td>{{getWeeksFavored(team)}}</td> -->
+          </tr> 
+        </tbody>
+      </table>
+    </li>
+  </ul> 
+</div>

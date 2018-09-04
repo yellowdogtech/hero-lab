@@ -1,4 +1,4 @@
-export class Hero {
+export class Owner {
     id: number;
     name: string;
 }
