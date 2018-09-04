@@ -56,7 +56,7 @@ export class OwnerDetailComponent implements OnInit {
       }
     });
 
-    if(!match[0]) { return "-"; }
+    if(match[0] === undefined) { return "-"; }
   
     return match[0] + "";
   }
@@ -64,5 +64,4 @@ export class OwnerDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
-
 }

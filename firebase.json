@@ -9,7 +9,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "hero-app/index.html"
+        "destination": "/index.html"
       }
     ]
   }
